@@ -1,0 +1,55 @@
+body{
+  max-height: 100%;
+  background-color: #202124;
+  font-family: 'Poppins', sans-serif;
+  color: azure;
+ 
+}
+
+.main{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.container-main{
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  margin-top: 3rem;
+  border-radius: 1.5rem;
+  height: 410px;
+  width: 500px;
+  background-color: #5f636877;
+}
+
+h2{
+  padding-top: 0;
+  text-align: center;
+}
+.button-p1, .button-p2{
+background-color: #212421;
+border-color: #212421;
+}
+
+  
+.form-select{
+  width: 100%;
+
+}
+.res-cont{
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.winner{
+  color: green
+}
+
+.loser{
+  color: red;
+}
