@@ -4,6 +4,9 @@ const p1 = document.querySelector('.p1')
 const p2 = document.querySelector('.p2')
 const res = document.querySelector('#reset')
 const numRounds = document.querySelector('#rounds')
+const btn1 = document.querySelector("#p1Button")
+const btn2 = document.querySelector("#p2Button")
+const score = document.querySelector('.scoreHistory')
 
 
 let p1Score = 0;
@@ -11,9 +14,17 @@ let p2Score = 0;
 let winScore = 0;
 let isGameOver = false;
 
+btn1.disabled = true;
+btn2.disabled = true;
+
 numRounds.addEventListener('change', () =>{
   winScore=parseInt((numRounds.value))
+  btn1.disabled = false;
+  btn2.disabled = false;
   reset();
+  const history = document.createElement('li')
+  history.append(`Round start. Target score is: ${numRounds.value}`)
+  score.append(history)
 })
 
 p1Button.addEventListener('click', ()=>{
@@ -23,8 +34,13 @@ p1Button.addEventListener('click', ()=>{
      isGameOver = true;
      p1.classList.add('winner')
      p2.classList.add('loser')
+
   } 
-  p1.textContent = p1Score; 
+  p1.textContent = p1Score;
+ 
+  const history = document.createElement('li')
+  history.prepend(`Player 1 wins round ${(p1Score+p2Score)}!`)
+  score.prepend(history)
  }
 
 })
@@ -38,10 +54,23 @@ p2Button.addEventListener('click', ()=>{
        p1.classList.add('loser')
     } 
     p2.textContent = p2Score; 
+
+    const history = document.createElement('li')
+    history.prepend(`Player 2 wins round ${(p1Score+p2Score)}!`)
+    score.prepend(history)
    }
   
 })
 
+function deleteScore() {
+  var e = document.querySelector("ul");
+  
+  var child = e.lastElementChild; 
+  while (child) {
+      e.removeChild(child);
+      child = e.lastElementChild;
+  }
+}
 
 function reset() {
   isGameOver = false;
@@ -51,8 +80,11 @@ function reset() {
   p2.textContent = 0;
   p1.classList.remove('winner', 'loser')
   p2.classList.remove('loser', 'winner')
-
+  deleteScore()
 }
 
 
+
 res.addEventListener('click', reset)
+
+
