@@ -32,9 +32,7 @@ numRounds.addEventListener('change', () =>{
 
 p1Button.addEventListener('click', ()=>{
  if (isGameOver) return;
-
  p1Score += 1;
-
  
 if (isTiebreaker) {
    const diff = p1Score-p2Score
@@ -44,7 +42,12 @@ if (isTiebreaker) {
       p1.classList.add('winner')
       p2.classList.add('loser')
     }
-  
+    if (p1Score===p2Score) {
+      const history = document.createElement('li')
+      history.prepend(`Tiebreaker!! First to lead 2 points win`)
+      score.prepend(history)
+    }
+
  } else {
     isTiebreaker = tieBreakerScore === p1Score && tieBreakerScore === p2Score;
 
@@ -53,24 +56,20 @@ if (isTiebreaker) {
     p1.classList.add('winner')
     p2.classList.add('loser')
  } 
-}
 
+}
  p1.textContent = p1Score;
  const history = document.createElement('li')
  history.prepend(`Player 1 wins round ${(p1Score+p2Score)}!`)
  score.prepend(history)
-
-
  }
 
 )
 
 p2Button.addEventListener('click', ()=>{
   if (isGameOver) return;
- 
   p2Score += 1;
  
-  
  if (isTiebreaker) {
     const diff = p2Score-p1Score
  
@@ -78,6 +77,11 @@ p2Button.addEventListener('click', ()=>{
       isGameOver = true;
       p2.classList.add('winner')
       p1.classList.add('loser')
+     }
+     if (p2Score===p1Score) {
+      const history = document.createElement('li')
+      history.prepend(`Tiebreaker!! First to lead 2 points win`)
+      score.prepend(history)
      }
    
   } else {
@@ -88,14 +92,12 @@ p2Button.addEventListener('click', ()=>{
      p2.classList.add('winner')
      p1.classList.add('loser')
   } 
+
  }
- 
   p2.textContent = p2Score;
   const history = document.createElement('li')
   history.prepend(`Player 2 wins round ${(p1Score+p2Score)}!`)
   score.prepend(history)
- 
- 
   }
  
  )
@@ -113,8 +115,10 @@ function deleteScore() {
 
 function reset() {
   isGameOver = false;
+  isTiebreaker = false;
   p1Score = 0;
   p2Score = 0;
+  diff = 0;
   p1.textContent = 0;
   p2.textContent = 0;
   p1.classList.remove('winner', 'loser')
