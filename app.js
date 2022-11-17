@@ -41,12 +41,11 @@ if (isTiebreaker) {
       isGameOver = true;
       p1.classList.add('winner')
       p2.classList.add('loser')
+
     }
-    if (p1Score===p2Score) {
-      const history = document.createElement('li')
-      history.prepend(`Tiebreaker!! First to lead 2 points win`)
-      score.prepend(history)
-    }
+    const history = document.createElement('li')
+    history.prepend(`Player 1 wins round ${(p1Score+p2Score)}!`)
+    score.prepend(history)
 
  } else {
     isTiebreaker = tieBreakerScore === p1Score && tieBreakerScore === p2Score;
@@ -56,12 +55,17 @@ if (isTiebreaker) {
     p1.classList.add('winner')
     p2.classList.add('loser')
  } 
-
-}
- p1.textContent = p1Score;
  const history = document.createElement('li')
  history.prepend(`Player 1 wins round ${(p1Score+p2Score)}!`)
  score.prepend(history)
+ if (isTiebreaker && p1Score===p2Score) {
+  const history = document.createElement('li')
+  history.prepend(`Tiebreaker!! First to lead 2 points win`)
+  score.prepend(history)
+}
+}
+ p1.textContent = p1Score;
+
  }
 
 )
@@ -78,26 +82,30 @@ p2Button.addEventListener('click', ()=>{
       p2.classList.add('winner')
       p1.classList.add('loser')
      }
-     if (p2Score===p1Score) {
-      const history = document.createElement('li')
-      history.prepend(`Tiebreaker!! First to lead 2 points win`)
-      score.prepend(history)
-     }
-   
+  const history = document.createElement('li')
+  history.prepend(`Player 2 wins round ${(p1Score+p2Score)}!`)
+  score.prepend(history)
   } else {
      isTiebreaker = tieBreakerScore === p1Score && tieBreakerScore === p2Score;
- 
+
        if (p2Score === winScore) {
      isGameOver = true;
      p2.classList.add('winner')
      p1.classList.add('loser')
   } 
-
- }
-  p2.textContent = p2Score;
   const history = document.createElement('li')
   history.prepend(`Player 2 wins round ${(p1Score+p2Score)}!`)
   score.prepend(history)
+  if (isTiebreaker && p1Score===p2Score) {
+   const history = document.createElement('li')
+   history.prepend(`Tiebreaker!! First to lead 2 points win`)
+   score.prepend(history)
+  
+ }
+ }
+  p2.textContent = p2Score;
+
+
   }
  
  )
